@@ -3,7 +3,9 @@ from datetime import datetime, timedelta
 
 from django.test.client import Client
 from django.utils import timezone
+from django.urls import reverse
 
+from news.forms import BAD_WORDS
 from news.models import Comment, News
 from yanews.settings import NEWS_COUNT_ON_HOME_PAGE
 
@@ -90,3 +92,27 @@ def comments(author, news):
         for index in range(10)
     ]
     Comment.objects.bulk_create(all_comments)
+
+
+@pytest.fixture
+def comment_form():
+    return {
+        'text': 'Текст комментария'
+    }
+
+
+@pytest.fixture
+def bad_words_form():
+    return {
+        'text': f'Коммент с недопустимым словом {BAD_WORDS[0]}'
+        }
+
+
+@pytest.fixture
+def url_comment_edit(kwarg_news):
+    return reverse('news:edit', kwargs=kwarg_news)
+
+
+@pytest.fixture
+def url_comment_delete(kwarg_comment):
+    return reverse('news:delete', kwargs=kwarg_comment)
