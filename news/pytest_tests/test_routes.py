@@ -28,11 +28,11 @@ def test_pages_availability(client, name, kwargs):
 
 @pytest.mark.django_db
 @pytest.mark.parametrize(
-        'user_client, status_code',
-        (
-            (pytest.lazy_fixture('author_client'), HTTPStatus.OK),
-            (pytest.lazy_fixture('reader_client'), HTTPStatus.NOT_FOUND),
-        )
+    'user_client, status_code',
+    (
+        (pytest.lazy_fixture('author_client'), HTTPStatus.OK),
+        (pytest.lazy_fixture('reader_client'), HTTPStatus.NOT_FOUND),
+    )
 )
 @pytest.mark.parametrize(
     'name, kwargs',
@@ -43,7 +43,7 @@ def test_pages_availability(client, name, kwargs):
 )
 def test_availability_for_comment_edit_and_delete(
     name, kwargs, user_client, status_code
-     ):
+):
     """
     Доступность страниц изменеия/удаления комментария
     для автора и другого пользователя.
