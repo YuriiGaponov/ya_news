@@ -52,6 +52,11 @@ def kwarg_news(news):
 
 
 @pytest.fixture
+def news_url(kwarg_news):
+    return reverse('news:detail', kwargs=kwarg_news)
+
+
+@pytest.fixture
 def all_news():
     today = datetime.today()
     all_news = [
